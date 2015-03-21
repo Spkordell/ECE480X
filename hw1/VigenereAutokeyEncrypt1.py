@@ -15,3 +15,4 @@ if __name__ == "__main__":
     cipherTextString = ""
     cipherTextString = cipherTextString.join(map(chr,ciphertext))
     print "ciphertext: " + cipherTextString.upper()
+    
