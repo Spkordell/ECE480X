@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # Author: Steven Kordell
 
-
 def ntoa(x):
     return {
         '0': 26,
@@ -13,55 +12,56 @@ def ntoa(x):
         '5': 31,
     }[x]
 
+def aton(x):
+    return {
+         26:'0',
+         27:'1',
+         28:'2',
+         29:'3',
+         30:'4',
+         31:'5',
+    }[x]
+
 def decChar(char, vector):
-    num = ord(char)-ord('a')
-    bin = 0
+    num = ord(char) - ord('a')
     if (num < 0):
         num = ntoa(char)
-    index = 0;
-    for c in vector:
-        if c == '1':
-            bin += 2**index
-    res = bin ^ num
+    res = num ^ vector
     if (res > 25):
         return aton(res)
     else:
         return chr(res+ord('a'))
 
 if __name__ == "__main__":
-    #coefficients = raw_input('Coefficients: ').lower()
-    #coefficients = "000011"
-    #ciphertext = raw_input('Ciphertext: ').lower()      
+    # coefficients = raw_input('Coefficients: ').lower()
+    # coefficients = "000011"
+    # ciphertext = raw_input('Ciphertext: ').lower()      
     ciphertext = "j5a0edj2b".lower()
-    #starting_vector = raw_input('Starting Vector: ').lower()
-    starting_vector = 31#111111
+    # starting_vector = raw_input('Starting Vector: ').lower()
+    starting_vector = 63  # 111111
     vector = starting_vector
     
-    plaintext = ""
-    
+    lsfrOutput = []    
     print "LSFR sequence:" 
-    print vector
-    #plaintext = plaintext+decChar(ciphertext[0],vector)
-    vector = str(int(vector[4]) ^ int(vector[5])) + vector[:-1]   
-    index = 4
+    print "{0:b}".format(vector)  
+    vector |= ((vector & 1) ^ ((vector & 2) >> 1)) << 6 
+    lsfrOutput.append(vector & 1) 
+    vector >>= 1    
     while (vector != starting_vector):
-        print vector
-        if (index % 5 == 0):
-            #plaintext = plaintext+decChar(ciphertext[0],vector[:-5])
-            print "h"
-        vector = str(int(vector[4]) ^ int(vector[5])) + vector[:-1]
-        index+=1
+        print "{0:06b}".format(vector)
+        vector |= ((vector & 1) ^ ((vector & 2) >> 1)) << 6
+        lsfrOutput.append(vector & 1)
+        vector >>= 1
     
-    print plaintext
-        
-#     key = passphrase
-#     plaintext = [None]*len(ciphertext)
-#        
-#     for index, c in enumerate(ciphertext):
-#         plaintext[index] = (((ord(c) - ord('a')) - (ord(key[index]) - ord('a'))) % 26) + ord('a')
-#         key+=chr(plaintext[index])
-#         
-#     plainTextString = ""
-#     plainTextString = plainTextString.join(map(chr,plaintext))
-#     print "Plaintext: " + plainTextString.lower()
+    plaintext = ""
+    index = 0
+    for c in ciphertext:
+        vec = 0
+        for i in range(5):
+            vec += lsfrOutput[index + i] << 4-i
+        plaintext += decChar(c, vec)
+        index += 5
+
+    print "Output: " + plaintext
+
     
