@@ -2,37 +2,15 @@
 # -*- coding: utf-8 -*-
 # Author: Steven Kordell
 
-if __name__ == "__main__":
-    print "hello"
-    # coefficients = raw_input('Coefficients: ').lower()
-    # coefficients = "000011"
-    # ciphertext = raw_input('Ciphertext: ').lower()      
-#     ciphertext = "j5a0edj2b".lower()
-#     # starting_vector = raw_input('Starting Vector: ').lower()
-#     starting_vector = 63  # 111111
-#     vector = starting_vector
-#     
-#     lsfrOutput = []    
-#     print "LSFR sequence:" 
-#     print "{0:b}".format(vector)  
-#     vector |= ((vector & 1) ^ ((vector & 2) >> 1)) << 6 
-#     lsfrOutput.append(vector & 1) 
-#     vector >>= 1    
-#     while (vector != starting_vector):
-#         print "{0:06b}".format(vector)
-#         vector |= ((vector & 1) ^ ((vector & 2) >> 1)) << 6
-#         lsfrOutput.append(vector & 1)
-#         vector >>= 1
-#     
-#     plaintext = ""
-#     index = 0
-#     for c in ciphertext:
-#         vec = 0
-#         for i in range(5):
-#             vec += lsfrOutput[index + i] << 4-i
-#         plaintext += decChar(c, vec)
-#         index += 5
-# 
-#     print "Output: " + plaintext
+from numpy import array
 
-    
+if __name__ == "__main__":
+    S_in = 0b101010
+        
+    S4 = array([
+    [7,13,14,3,0,6,9,10,1,2,8,5,11,12,4,15],
+    [13,8,11,5,6,15,0,3,4,7,2,12,1,10,14,9],
+    [10,6,9,0,12,11,7,13,15,1,3,14,5,2,8,4],
+    [3,15,0,66,10,1,13,8,9,4,5,11,12,7,2,14]])
+
+    S_out = S4[(S_in & 1) | (S_in >> 4), (S_in >> 1 & 0b1111)]

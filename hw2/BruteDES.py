@@ -10,14 +10,16 @@ if __name__ == "__main__":
     plaintext = '48656c6c6f212121'
     ciphertext = '1f6339383e8da6c4'
             
+    encoded_ciphertext = ciphertext.encode('hex')
     start = timeit.default_timer()
     
     k = '0000000000000000'   
     ct = ''
-    while ct != ciphertext:
+    pt = plaintext.encode('hex')
+    while ct != ciphertext and ct != encoded_ciphertext:
         key = k.decode('hex')
         a = DES.new(key)
-        ct = a.encrypt(plaintext.encode('hex'))   
+        ct = a.encrypt(pt)   
         print '{:016X}'.format(int(k, 16)) + ': ' + ct
         
         #increment to next hex value'
