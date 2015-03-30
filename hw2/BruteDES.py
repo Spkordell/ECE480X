@@ -8,8 +8,7 @@ if __name__ == "__main__":
     plaintext = '48656c6c6f212121'
     ciphertext = '1f6339383e8da6c4'
             
-    k = '0000000000000000'
-    
+    k = '0000000000000000'   
     ct = ''
     while ct != ciphertext:
         key = k.decode('hex')
@@ -19,4 +18,4 @@ if __name__ == "__main__":
        
         #increment to next hex value'
         k = '{:016X}'.format(int(k, 16)+1)
-    print "key is: " + key-1
+    print "key is: " + '{:016X}'.format(int(k, 16)-1)
