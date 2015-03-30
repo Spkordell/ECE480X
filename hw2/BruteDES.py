@@ -3,19 +3,27 @@
 # Author: Steven Kordell
 
 from Crypto.Cipher import DES
+import timeit
 
 if __name__ == "__main__":    
+    
     plaintext = '48656c6c6f212121'
     ciphertext = '1f6339383e8da6c4'
             
+    start = timeit.default_timer()
+    
     k = '0000000000000000'   
     ct = ''
     while ct != ciphertext:
         key = k.decode('hex')
         a = DES.new(key)
         ct = a.encrypt(plaintext.encode('hex'))   
-        print '{:016X}'.format(int(k, 16)) + ' : ' + ct
-       
+        print '{:016X}'.format(int(k, 16)) + ': ' + ct
+        
         #increment to next hex value'
         k = '{:016X}'.format(int(k, 16)+1)
-    print "key is: " + '{:016X}'.format(int(k, 16)-1)
+               
+    stop = timeit.default_timer()        
+    print "key is: " + '{:016X}'.format(int(k, 16)-1)    
+    print "Elapsed time: " + str(stop - start)
+    
