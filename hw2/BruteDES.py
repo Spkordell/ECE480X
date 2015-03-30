@@ -16,12 +16,17 @@ if __name__ == "__main__":
     k = '0000000000000000'   
     ct = ''
     pt = plaintext.encode('hex')
-    while ct != ciphertext and ct != encoded_ciphertext:
+        
+    printData = 0
+    while ct != encoded_ciphertext:      
         key = k.decode('hex')
         a = DES.new(key)
         ct = a.encrypt(pt)   
-        print '{:016X}'.format(int(k, 16)) + ': ' + ct
-        
+        if printData == 1000000: ##only print current progress every 1000000 iterations (printing lots of data slows the process down)
+            print '{:016X}'.format(int(k, 16)) + ': ' + ct
+            printData = 0 
+        else:
+            printData+=1
         #increment to next hex value'
         k = '{:016X}'.format(int(k, 16)+1)
                
