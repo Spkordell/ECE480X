@@ -16,6 +16,8 @@ if __name__ == "__main__":
     k = '0000000000000000'   
     ct = ''
     pt = plaintext.encode('hex')
+
+    
     printData = 0
     while ct != ciphertext and ct != encoded_ciphertext:
         key = k.decode('hex')

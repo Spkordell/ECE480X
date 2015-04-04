@@ -8,7 +8,7 @@ import timeit
 if __name__ == "__main__":    
     
     plaintext = '48656c6c6f212121'
-    ciphertext = '1f6339383e8da6c4'
+    ciphertext = 'ddb92846141922b8'
             
     encoded_ciphertext = ciphertext.encode('hex')
     start = timeit.default_timer()
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     while ct != encoded_ciphertext:      
         key = k.decode('hex')
         a = DES.new(key)
-        ct = a.encrypt(pt)   
+        ct = a.encrypt(pt)
         if printData == 1000000: ##only print current progress every 1000000 iterations (printing lots of data slows the process down)
             print '{:016X}'.format(int(k, 16)) + ': ' + ct
             printData = 0 
