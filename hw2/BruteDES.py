@@ -15,7 +15,7 @@ if __name__ == "__main__":
     
     k = '0000000000000000'   
     ct = ''
-    pt = plaintext.encode('hex')
+    pt = plaintext
         
     printData = 0
     while ct != encoded_ciphertext:      
@@ -23,7 +23,8 @@ if __name__ == "__main__":
         a = DES.new(key)
         ct = a.encrypt(pt)
         if printData == 1000000: ##only print current progress every 1000000 iterations (printing lots of data slows the process down)
-            print '{:016X}'.format(int(k, 16)) + ': ' + ct
+            #print '{:016X}'.format(int(k, 16)) + ': ' + ct
+            print ct.encode('hex')
             printData = 0 
         else:
             printData+=1

@@ -16,8 +16,13 @@
 
 from Crypto.Cipher import AES
 
+def cntr_func():
+    cntr_func.cntr = '{:032X}'.format(int(cntr_func.cntr, 16)+1)
+    return cntr_func.cntr.decode('hex')
+cntr_func.cntr = '00000000000000000000000000000000'
+        
 # opening the source file (a .bmp file)
-with open('Gompei.bmp','rb') as in_file:
+with open('wpi_logo.bmp','rb') as in_file:
     # Playing a bit with the .BMP file format:
 
     # get size info:
@@ -34,7 +39,7 @@ with open('Gompei.bmp','rb') as in_file:
 
     ## read data in chunks, encrypt and write to new file
     #open new file for writing
-    with open('Gompei_enc_ctr.bmp','wb') as out_file:
+    with open('wpi_logo_enc.bmp','wb') as out_file:
 
         # read/write header
         in_file.seek(0)
@@ -46,9 +51,9 @@ with open('Gompei.bmp','rb') as in_file:
         #** below here: 
 
         
-        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
+        enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
         #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CBC, '00000000000000000000000000000000'.decode('hex'))
-        enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CTR, counter=lambda:'00000000000000000000000000000000'.decode('hex'))
+        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CTR, counter=cntr_func)
 
         # read data in chunks of 64 bit
         buf = in_file.read(16)
