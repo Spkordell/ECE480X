@@ -22,7 +22,7 @@ def cntr_func():
 cntr_func.cntr = '00000000000000000000000000000000'
         
 # opening the source file (a .bmp file)
-with open('wpi_logo.bmp','rb') as in_file:
+with open('Gompei.bmp','rb') as in_file:
     # Playing a bit with the .BMP file format:
 
     # get size info:
@@ -39,7 +39,7 @@ with open('wpi_logo.bmp','rb') as in_file:
 
     ## read data in chunks, encrypt and write to new file
     #open new file for writing
-    with open('wpi_logo_enc.bmp','wb') as out_file:
+    with open('Gompei_enc.bmp','wb') as out_file:
 
         # read/write header
         in_file.seek(0)
