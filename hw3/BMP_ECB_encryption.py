@@ -34,7 +34,7 @@ with open('Gompei.bmp','rb') as in_file:
 
     ## read data in chunks, encrypt and write to new file
     #open new file for writing
-    with open('Gompei_enc_ecb.bmp','wb') as out_file:
+    with open('Gompei_enc_ctr.bmp','wb') as out_file:
 
         # read/write header
         in_file.seek(0)
@@ -45,9 +45,10 @@ with open('Gompei.bmp','rb') as in_file:
         #** using the appropriate mode of encryption ****
         #** below here: 
 
+        
+        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
         #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CBC, '00000000000000000000000000000000'.decode('hex'))
-        enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
-        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CTR, '00000000000000000000000000000000'.decode('hex'))
+        enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CTR, counter=lambda:'00000000000000000000000000000000'.decode('hex'))
 
         # read data in chunks of 64 bit
         buf = in_file.read(16)
