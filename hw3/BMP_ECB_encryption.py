@@ -14,6 +14,7 @@
 # >Gompei_enc.bmp< by clicking on "Data... --> Gompei_enc.bmp" and then choosing and
 # downloading from the provided link to the file.
 
+from Crypto.Cipher import AES
 
 # opening the source file (a .bmp file)
 with open('Gompei.bmp','rb') as in_file:
@@ -33,7 +34,7 @@ with open('Gompei.bmp','rb') as in_file:
 
     ## read data in chunks, encrypt and write to new file
     #open new file for writing
-    with open('Gompei_enc.bmp','wb') as out_file:
+    with open('Gompei_enc_ecb.bmp','wb') as out_file:
 
         # read/write header
         in_file.seek(0)
@@ -44,13 +45,17 @@ with open('Gompei.bmp','rb') as in_file:
         #** using the appropriate mode of encryption ****
         #** below here: 
 
+        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CBC, '00000000000000000000000000000000'.decode('hex'))
+        enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
+        #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CTR, '00000000000000000000000000000000'.decode('hex'))
+
         # read data in chunks of 64 bit
         buf = in_file.read(16)
 
 
         while len(buf)==16:
             # write data in chunks of 64 bit:
-            out_file.write(buf)
+            out_file.write(enc.encrypt((buf)))
 
             # read data in chunks
             buf = in_file.read(16)
