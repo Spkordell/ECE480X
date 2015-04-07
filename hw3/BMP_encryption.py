@@ -49,7 +49,6 @@ with open('Gompei.bmp','rb') as in_file:
         #** Insert your code to encrypt the data ********
         #** using the appropriate mode of encryption ****
         #** below here: 
-
         
         enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_ECB, '00000000000000000000000000000000'.decode('hex'))
         #enc = AES.new('00000000000000000000000000000000'.decode('hex'), AES.MODE_CBC, '00000000000000000000000000000000'.decode('hex'))
