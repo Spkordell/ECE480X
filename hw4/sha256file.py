@@ -10,8 +10,7 @@ import hashlib
 
 if __name__ == "__main__":    
     
-    
-    with open('Gompei.bmp','rb') as in_file:
+    with open('Project2.pdf','rb') as in_file:
         filehash = hashlib.sha256(in_file.read()).hexdigest()
     
         print filehash
