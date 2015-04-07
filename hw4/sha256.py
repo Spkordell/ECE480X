@@ -10,4 +10,12 @@ import hashlib
 
 if __name__ == "__main__":    
     #plaintext = raw_input('plaintext: ')
-    plaintext = "The quick brown fox jumps over the lazy dog"
+    plaintext1 = "The quick brown fox jumps over the lazy dog"
+    plaintext2 = "The quick brown fox jumps over the lazy doh"
+    
+    hash1 = hashlib.sha256(plaintext1).hexdigest()
+    hash2 = hashlib.sha256(plaintext2).hexdigest()
+    
+    print plaintext1 + ": " + hash1
+    print plaintext2 + ": " + hash2
+    
