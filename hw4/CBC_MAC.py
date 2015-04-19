@@ -6,7 +6,6 @@
 # Date: 04/13/2015
 # Mailbox number: 663
 
-
 from Crypto.Cipher import AES
 
 BLOCK_SIZE = 32 #number of bytes in an AES Block
