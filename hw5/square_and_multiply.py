@@ -25,7 +25,11 @@ def my_pow(b,e,m):
     return r
 
 if __name__ == "__main__":    
+    print my_pow(235973,456789,583903)
+    print my_pow(984327457683,2153489582,994348472629)
+    
     #test a whole bunch of values      
+    """
     for i in range (0,1024):
         for j in range (0,1024):
             for k in range (1,1024):
@@ -33,6 +37,6 @@ if __name__ == "__main__":
                 b = my_pow(i,j,k)
                 if a != b:
                     print str(a)+" "+str(b)+" "+str(i)+" "+str(j)+" "+str(k)                 
-                    
+    """       
                     
     
