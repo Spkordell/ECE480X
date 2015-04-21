@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print "numer of elemnts in group = " + str(count) 
 
     #finds all the generator elements
-    #an element of the group is a generator if it can produce every element of the group when raised to ever power between 1 and |G| modulus the group number (n)
+    #an element of the group is a generator if it can produce every element of the group when raised to every power between 1 and |G| modulus the group number (n)
     generators = []
     count = 0
     for i in range(1,n):
@@ -32,6 +32,6 @@ if __name__ == "__main__":
             generators.append(i)
             count+=1
     
-    print "Generators =" + str(generators)
+    print "Generators = " + str(generators)
     print "numer of generators in group = " + str(count) 
     
