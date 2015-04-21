@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Project 5:
+# Name:Steven Kordell
+# Date: 04/21/2015
+# Mailbox number: 663
+
+import fractions
+
+if __name__ == "__main__":    
+    n = 4969;   
+    #finds all the group elements
+    count = 0
+    G = []
+    for i in range(0,n):
+        if fractions.gcd(i,n) == 1:
+            G.append(i)
+            count+=1
+    print "G = " + str(G)
+    print "numer of elemnts in group = " + str(count) 
+
+    #finds all the generator elements
+    #an element of the group is a generator if it can produce every element of the group when raised to ever power between 1 and |G| modulus the group number (n)
+    generators = []
+    count = 0
+    for i in range(1,n):
+        generated_elements = []
+        for j in range(1,n):
+            generated_elements.append(pow(i,j,n))
+        if set(generated_elements) == set(G):
+            generators.append(i)
+            count+=1
+    
+    print "Generators =" + str(generators)
+    print "numer of generators in group = " + str(count) 
+    

@@ -46,7 +46,9 @@ if __name__ == "__main__":
     
     if k_A == k_B:
         print "Keys are equal"
-    
+    else:
+        print "Keys are not equal"
+        
     key = hashlib.sha256(hex(k_A)[2:-1].decode('hex')).hexdigest()
     
     print key
