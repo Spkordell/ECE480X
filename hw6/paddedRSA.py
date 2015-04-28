@@ -11,7 +11,6 @@ from fractions import gcd
 
 magN = 1024
 magM = 256
-padlength = magN - magM - 1
 
 def egcd(a, b):
     #extended eucleadian algorithm for finding inverses
@@ -34,7 +33,7 @@ def modinv(a, m):
 
 def keygen():
     from Crypto.PublicKey import RSA
-    #choose two large primes p, q
+    #choose two large random primes p, q
     genPrime = RSA.generate(1024)
     p = getattr(genPrime.key, 'p')
     q = getattr(genPrime.key, 'q')
@@ -52,33 +51,25 @@ def keygen():
     return [k_pub,k_sec]
 
 def enc(m, k_pub):    
-    [N,e] = k_pub    
+    [N,e] = k_pub
+    padlength = magN - magM - 1
     r = randint(0, 2 ** padlength)
-    mprime = (r << padlength) | m
-    
-    return pow(m,e,N)
+    mprime = (r << magM) | m
     return pow(mprime, e, N) #ciphertext
 
 def dec(c, k_sec):
     [N,d] = k_sec  
     mprime = pow(c,d,N)
-    print mprime & ((2**magM)-1)
-    return mprime & ((2**magM)-1) #plaintext
+    return mprime & (2**magM)-1
     
 if __name__ == "__main__":       
     [k_pub, k_sec] = keygen() #generate random key pair
-    m = randint(0,2^256-1) #generate random message to test with
-
-    print m
+    m = randint(0,2**magM-1) #generate random message to test with
+    
     c = enc(m,k_pub)
-    print c
     m1 = dec(c,k_sec)
-    print m1
-
 
     if m == m1:
         print("Correct")
     else:
         print("Wrong")
-
-
