@@ -30,7 +30,4 @@ if __name__ == "__main__":
     p = N / q
     
     print "p = " + str(p)
-    print "q = " + str(q)       
-
-    
-    
+    print "q = " + str(q)
